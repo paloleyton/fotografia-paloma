@@ -217,7 +217,24 @@
     #sobre-mi {
       padding: 96px 48px;
       border-top: 1px solid var(--light);
-      max-width: 760px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .sobre-photo-wrap {
+      position: sticky;
+      top: 72px;
+    }
+
+    .sobre-photo-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-radius: 6px;
     }
 
     .sobre-label {
@@ -385,6 +402,18 @@
     }
 
     /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      #sobre-mi {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 64px 32px 80px;
+      }
+      .sobre-photo-wrap {
+        position: static;
+        max-width: 280px;
+      }
+    }
+
     @media (max-width: 768px) {
       header { padding: 0 20px; }
 
@@ -411,7 +440,9 @@
         gap: 40px;
       }
 
-      #sobre-mi { padding: 52px 20px 72px; }
+      #sobre-mi { padding: 52px 20px 72px; grid-template-columns: 1fr; gap: 32px; }
+      .sobre-photo-wrap { position: static; max-width: 100%; }
+      .sobre-photo-wrap img { aspect-ratio: 4/3; }
       .sobre-bio { font-size: 14px; }
       .sobre-detail { margin-top: 36px; }
 
@@ -465,6 +496,10 @@
 
 <!-- ─── SOBRE MÍ ─── -->
 <section id="sobre-mi">
+  <div class="sobre-photo-wrap">
+    <img src="FOTOS%20PI%20PALITO/WhatsApp%20Image%202026-06-17%20at%2009.17.07.jpeg" alt="Paloma Leyton">
+  </div>
+  <div>
   <span class="sobre-label">Sobre mí</span>
   <h2 class="sobre-name">Paloma Leyton</h2>
   <p class="sobre-title">Fotógrafa</p>
@@ -478,6 +513,7 @@
       <span class="sobre-detail-key">Materia</span>
       <span class="sobre-detail-val">Fotografía I</span>
     </div>
+  </div>
   </div>
 </section>
 
