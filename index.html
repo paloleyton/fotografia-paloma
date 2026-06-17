@@ -4,16 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Paloma Leyton — La ciudad prestada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f8f7f4;
-      --fg: #111;
-      --mid: #888;
-      --light: #e0ddd8;
-      --serif: 'Georgia', 'Times New Roman', serif;
-      --sans: 'Helvetica Neue', Arial, sans-serif;
+      --bg: #faf4ec;
+      --fg: #2c1f14;
+      --mid: #9a8a7a;
+      --light: #e6ddd2;
+      --warm: #c8a882;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
     }
 
     html, body {
@@ -32,16 +36,17 @@
       justify-content: space-between;
       padding: 0 40px;
       height: 52px;
-      background: rgba(248,247,244,0.94);
+      background: rgba(250,244,236,0.94);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--light);
     }
 
     .site-name {
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 15px;
       font-style: italic;
-      letter-spacing: 0.04em;
+      font-weight: 400;
+      letter-spacing: 0.03em;
       color: var(--fg);
       text-decoration: none;
       user-select: none;
@@ -56,7 +61,8 @@
     .header-nav a {
       font-family: var(--sans);
       font-size: 10px;
-      letter-spacing: 0.14em;
+      font-weight: 300;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--mid);
       text-decoration: none;
@@ -83,41 +89,43 @@
       display: block;
       font-family: var(--sans);
       font-size: 10px;
-      letter-spacing: 0.2em;
+      font-weight: 300;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--mid);
+      color: var(--warm);
       margin-bottom: 36px;
     }
 
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(36px, 4.5vw, 60px);
-      font-weight: normal;
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      margin-bottom: 10px;
+      font-size: clamp(42px, 5vw, 68px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
     }
 
     .hero-subtitle {
       font-family: var(--serif);
-      font-size: clamp(15px, 1.6vw, 20px);
-      font-weight: normal;
+      font-size: clamp(15px, 1.6vw, 19px);
+      font-weight: 300;
       font-style: italic;
       color: var(--mid);
       margin-bottom: 44px;
     }
 
     .hero-divider {
-      width: 28px;
+      width: 32px;
       height: 1px;
-      background: var(--fg);
+      background: var(--warm);
       margin-bottom: 36px;
     }
 
     .hero-desc {
-      font-size: 15px;
-      line-height: 1.85;
-      color: #444;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: #5a4535;
       max-width: 440px;
     }
 
@@ -154,15 +162,16 @@
 
     .gallery-header h2 {
       font-family: var(--serif);
-      font-size: 14px;
-      font-weight: normal;
+      font-size: 16px;
+      font-weight: 300;
       font-style: italic;
     }
 
     .gallery-header span {
       font-family: var(--sans);
       font-size: 10px;
-      letter-spacing: 0.12em;
+      font-weight: 300;
+      letter-spacing: 0.16em;
       color: var(--mid);
     }
 
@@ -182,7 +191,7 @@
       width: 100%;
       aspect-ratio: 3/2;
       overflow: hidden;
-      border-radius: 10px;
+      border-radius: 6px;
     }
 
     .gallery-item img {
@@ -198,8 +207,9 @@
     .gallery-item-num {
       font-family: var(--sans);
       font-size: 10px;
-      letter-spacing: 0.14em;
-      color: var(--mid);
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      color: var(--warm);
       margin-top: 12px;
     }
 
@@ -214,39 +224,42 @@
       display: block;
       font-family: var(--sans);
       font-size: 10px;
-      letter-spacing: 0.2em;
+      font-weight: 300;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--mid);
+      color: var(--warm);
       margin-bottom: 32px;
     }
 
     .sobre-name {
       font-family: var(--serif);
       font-size: clamp(32px, 3.5vw, 48px);
-      font-weight: normal;
+      font-weight: 300;
       line-height: 1.1;
       margin-bottom: 6px;
     }
 
     .sobre-title {
       font-family: var(--serif);
-      font-size: 16px;
+      font-size: 17px;
+      font-weight: 300;
       font-style: italic;
       color: var(--mid);
       margin-bottom: 40px;
     }
 
     .sobre-divider {
-      width: 28px;
+      width: 32px;
       height: 1px;
-      background: var(--fg);
+      background: var(--warm);
       margin-bottom: 36px;
     }
 
     .sobre-bio {
-      font-size: 15px;
-      line-height: 1.9;
-      color: #444;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.95;
+      color: #5a4535;
       max-width: 560px;
     }
 
@@ -270,15 +283,17 @@
     .sobre-detail-key {
       font-family: var(--sans);
       font-size: 10px;
-      letter-spacing: 0.14em;
+      font-weight: 300;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--mid);
+      color: var(--warm);
       min-width: 100px;
     }
 
     .sobre-detail-val {
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 15px;
+      font-weight: 300;
       color: var(--fg);
     }
 
@@ -343,7 +358,8 @@
     .photo-footer .back {
       font-family: var(--sans);
       font-size: 10px;
-      letter-spacing: 0.12em;
+      font-weight: 300;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--mid);
       cursor: pointer;
@@ -355,15 +371,17 @@
 
     .photo-footer .title {
       font-family: var(--serif);
-      font-size: 13px;
+      font-size: 14px;
+      font-weight: 300;
       font-style: italic;
     }
 
     .photo-footer .counter {
       font-family: var(--sans);
       font-size: 10px;
-      letter-spacing: 0.12em;
-      color: var(--mid);
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      color: var(--warm);
     }
 
     /* ─── RESPONSIVE ─── */
