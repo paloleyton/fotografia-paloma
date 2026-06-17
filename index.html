@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paloma Leyton — La ciudad prestada</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --fg: #111;
+      --mid: #888;
+      --light: #e0ddd8;
+      --serif: 'Georgia', 'Times New Roman', serif;
+      --sans: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--serif);
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 52px;
+      background: rgba(248,247,244,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--light);
+    }
+
+    .site-name {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      color: var(--fg);
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .header-nav a {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .header-nav a:hover { color: var(--fg); }
+
+    /* ─── HERO ─── */
+    #hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      padding-top: 52px;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 56px;
+    }
+
+    .hero-label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 36px;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4.5vw, 60px);
+      font-weight: normal;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--serif);
+      font-size: clamp(15px, 1.6vw, 20px);
+      font-weight: normal;
+      font-style: italic;
+      color: var(--mid);
+      margin-bottom: 44px;
+    }
+
+    .hero-divider {
+      width: 28px;
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 36px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      line-height: 1.85;
+      color: #444;
+      max-width: 440px;
+    }
+
+    .hero-desc p + p {
+      margin-top: 18px;
+    }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* ─── GALLERY ─── */
+    #gallery {
+      padding: 96px 48px;
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 72px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .gallery-header h2 {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: normal;
+      font-style: italic;
+    }
+
+    .gallery-header span {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--mid);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 56px 40px;
+    }
+
+    .gallery-item {
+      cursor: pointer;
+      transition: transform 0.35s ease;
+    }
+    .gallery-item:hover { transform: translateY(-4px); }
+
+    .gallery-thumb {
+      width: 100%;
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: opacity 0.35s ease;
+    }
+    .gallery-item:hover img { opacity: 0.85; }
+
+    .gallery-item-num {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--mid);
+      margin-top: 12px;
+    }
+
+    /* ─── SOBRE MÍ ─── */
+    #sobre-mi {
+      padding: 96px 48px;
+      border-top: 1px solid var(--light);
+      max-width: 760px;
+    }
+
+    .sobre-label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 32px;
+    }
+
+    .sobre-name {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: normal;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .sobre-title {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-style: italic;
+      color: var(--mid);
+      margin-bottom: 40px;
+    }
+
+    .sobre-divider {
+      width: 28px;
+      height: 1px;
+      background: var(--fg);
+      margin-bottom: 36px;
+    }
+
+    .sobre-bio {
+      font-size: 15px;
+      line-height: 1.9;
+      color: #444;
+      max-width: 560px;
+    }
+
+    .sobre-bio p + p {
+      margin-top: 20px;
+    }
+
+    .sobre-detail {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sobre-detail-item {
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+    }
+
+    .sobre-detail-key {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      min-width: 100px;
+    }
+
+    .sobre-detail-val {
+      font-family: var(--serif);
+      font-size: 14px;
+      color: var(--fg);
+    }
+
+    /* ─── PHOTO VIEWER ─── */
+    #view-photo {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: var(--bg);
+      flex-direction: column;
+    }
+    #view-photo.open { display: flex; }
+
+    .photo-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 88px 20px;
+      min-height: 0;
+      position: relative;
+    }
+
+    .photo-stage img {
+      max-width: 100%;
+      max-height: calc(100vh - 52px - 56px);
+      object-fit: contain;
+      display: block;
+    }
+
+    .click-prev, .click-next {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 88px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s;
+    }
+    .click-prev { left: 0; }
+    .click-next { right: 0; }
+    .click-prev svg, .click-next svg {
+      width: 18px; height: 18px;
+      stroke: var(--fg); fill: none; stroke-width: 1.2;
+      opacity: 0.22;
+      transition: opacity 0.2s;
+    }
+    .click-prev:hover svg, .click-next:hover svg { opacity: 0.75; }
+
+    .photo-footer {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      border-top: 1px solid var(--light);
+      flex-shrink: 0;
+    }
+
+    .photo-footer .back {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      cursor: pointer;
+      border: none; background: none;
+      transition: color 0.2s;
+      padding: 0;
+    }
+    .photo-footer .back:hover { color: var(--fg); }
+
+    .photo-footer .title {
+      font-family: var(--serif);
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .photo-footer .counter {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--mid);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      header { padding: 0 20px; }
+
+      #hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-image {
+        height: 75vw;
+        order: -1;
+      }
+      .hero-text {
+        padding: 40px 20px 56px;
+      }
+      .hero-label { margin-bottom: 20px; }
+      .hero-subtitle { font-size: 15px; margin-bottom: 28px; }
+      .hero-divider { margin-bottom: 24px; }
+      .hero-desc { font-size: 14px; line-height: 1.8; }
+
+      #gallery { padding: 52px 20px 64px; }
+      .gallery-header { margin-bottom: 36px; }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      #sobre-mi { padding: 52px 20px 72px; }
+      .sobre-bio { font-size: 14px; }
+      .sobre-detail { margin-top: 36px; }
+
+      .photo-stage { padding: 24px 12px 12px; }
+      .click-prev, .click-next { width: 40px; }
+      .photo-footer { padding: 0 16px; height: 48px; }
+    }
+
+    @media (max-width: 420px) {
+      .hero-title { font-size: 30px; }
+      .hero-image { height: 88vw; }
+      .sobre-name { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="site-name" href="#hero">Paloma Leyton</a>
+  <nav class="header-nav">
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="https://www.instagram.com/" target="_blank">Contacto</a>
+  </nav>
+</header>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-text">
+    <span class="hero-label">Fotografía &nbsp;·&nbsp; 2026</span>
+    <h1 class="hero-title">La ciudad<br>prestada</h1>
+    <p class="hero-subtitle">Un registro de lo que nos pertenece sin ser nuestro</p>
+    <div class="hero-divider"></div>
+    <div class="hero-desc">
+      <p>La ciudad no tiene dueños en las calles. Es de quien la camina, de quien la mira, de quien se detiene a fotografiarla.</p>
+      <p>Este trabajo es un recorrido por esos espacios que habitamos sin poseer: las esquinas que conocemos de memoria, las veredas que sentimos propias aunque no lo sean. Una exploración de lo cotidiano que se vuelve extraño cuando la cámara lo detiene.</p>
+    </div>
+  </div>
+  <div class="hero-image" id="hero-img-wrap">
+    <!-- imagen hero cargada por JS -->
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section id="gallery">
+  <div class="gallery-header">
+    <h2>Trabajos</h2>
+    <span id="gallery-count"></span>
+  </div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+</section>
+
+<!-- ─── SOBRE MÍ ─── -->
+<section id="sobre-mi">
+  <span class="sobre-label">Sobre mí</span>
+  <h2 class="sobre-name">Paloma Leyton</h2>
+  <p class="sobre-title">Fotógrafa</p>
+  <div class="sobre-divider"></div>
+  <div class="sobre-bio">
+    <p>La fotografía llegó como una manera de ver con más atención. No de registrar, sino de mirar de verdad: detenerse frente a lo que normalmente se pasa de largo.</p>
+    <p>La ciudad es el escenario que más me interpela. Sus espacios compartidos, sus texturas, la gente que la habita sin pensarlo demasiado. Cada imagen es una pregunta sobre lo que significa pertenecer a un lugar.</p>
+  </div>
+  <div class="sobre-detail">
+    <div class="sobre-detail-item">
+      <span class="sobre-detail-key">Materia</span>
+      <span class="sobre-detail-val">Fotografía I</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PHOTO VIEWER ─── -->
+<div id="view-photo">
+  <div class="photo-stage">
+    <div class="click-prev" id="click-prev">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </div>
+    <img id="photo-img" src="" alt="">
+    <div class="click-next" id="click-next">
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </div>
+  </div>
+  <footer class="photo-footer">
+    <button class="back" id="btn-back">← Volver</button>
+    <span class="title" id="photo-title">La ciudad prestada</span>
+    <span class="counter" id="photo-counter"></span>
+  </footer>
+</div>
+
+<script>
+  const FOLDER = "FOTOS PI PALITO";
+
+  function src(filename) {
+    return encodeURIComponent(FOLDER) + "/" + encodeURIComponent(filename);
+  }
+
+  const filenames = [
+    "FOTOGRAFÍA-01.jpg",
+    "FOTOGRAFÍA-02.jpg",
+    "FOTOGRAFÍA-03.jpg",
+    "FOTOGRAFÍA-04.jpg",
+    "FOTOGRAFÍA-05.jpg",
+    "FOTOGRAFÍA-06.jpg",
+    "FOTOGRAFÍA-07.jpg",
+    "FOTOGRAFÍA-08.jpg",
+    "FOTOGRAFÍA-09.jpg",
+    "FOTOGRAFÍA-10.jpg",
+    "FOTOGRAFÍA-12.jpg",
+    "FOTOGRAFÍA-13.jpg",
+    "FOTOGRAFÍA-14.jpg",
+    "FOTOGRAFÍA-15.jpg",
+    "FOTOGRAFÍA-16.jpg",
+    "FOTOGRAFÍA-17.jpg",
+    "FOTOGRAFÍA-18.jpg",
+    "FOTOGRAFÍA-19.jpg",
+    "FOTOGRAFÍA-20.jpg",
+    "FOTOGRAFÏA 4FOTOS-01.jpg",
+    "FOTOGRAFÏA 4FOTOS-02.jpg",
+    "FOTOGRAFÏA 4FOTOS-03.jpg",
+    "FOTOGRAFÏA 4FOTOS-04.jpg",
+    "DSC_0169.jpg",
+    "DSC_0171.jpg",
+  ];
+
+  // Imagen hero: primera foto antes del shuffle
+  const heroImg = document.createElement('img');
+  heroImg.src = src(filenames[0]);
+  heroImg.alt = "La ciudad prestada — Paloma Leyton";
+  document.getElementById('hero-img-wrap').appendChild(heroImg);
+
+  // Fisher-Yates shuffle
+  for (let i = filenames.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [filenames[i], filenames[j]] = [filenames[j], filenames[i]];
+  }
+
+  document.getElementById('gallery-count').textContent = filenames.length + " fotografías";
+
+  const grid       = document.getElementById('gallery-grid');
+  const photoView  = document.getElementById('view-photo');
+  const photoImg   = document.getElementById('photo-img');
+  const photoCount = document.getElementById('photo-counter');
+  let current = 0;
+
+  filenames.forEach((name, i) => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+
+    const thumb = document.createElement('div');
+    thumb.className = 'gallery-thumb';
+
+    const img = document.createElement('img');
+    img.src = src(name);
+    img.alt = String(i + 1).padStart(2, '0');
+    img.loading = 'lazy';
+
+    const num = document.createElement('p');
+    num.className = 'gallery-item-num';
+    num.textContent = String(i + 1).padStart(2, '0');
+
+    thumb.appendChild(img);
+    item.appendChild(thumb);
+    item.appendChild(num);
+    item.addEventListener('click', () => openPhoto(i));
+    grid.appendChild(item);
+  });
+
+  function openPhoto(index) {
+    current = index;
+    photoView.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    updatePhoto();
+  }
+
+  function updatePhoto() {
+    photoImg.src = src(filenames[current]);
+    photoCount.textContent =
+      String(current + 1).padStart(2, '0') + " / " +
+      String(filenames.length).padStart(2, '0');
+  }
+
+  function closeViewer() {
+    photoView.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function prev() { current = (current - 1 + filenames.length) % filenames.length; updatePhoto(); }
+  function next() { current = (current + 1) % filenames.length; updatePhoto(); }
+
+  document.getElementById('click-prev').addEventListener('click', prev);
+  document.getElementById('click-next').addEventListener('click', next);
+  document.getElementById('btn-back').addEventListener('click', closeViewer);
+
+  document.addEventListener('keydown', e => {
+    if (!photoView.classList.contains('open')) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prev();
+    if (e.key === 'Escape') closeViewer();
+  });
+
+  let tx = null;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    if (tx === null || !photoView.classList.contains('open')) return;
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
+    tx = null;
+  });
+</script>
+</body>
+</html>
